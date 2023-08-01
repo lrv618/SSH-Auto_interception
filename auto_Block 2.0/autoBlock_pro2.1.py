@@ -30,7 +30,7 @@ def monitorLog(logFile):
     tempIp = {}        
     deniedDict = getDenies()     
     with open(logFile) as file:
-        while True:   #无限循环，用于持续监控安全日志文件。           
+        while True:             
             line = file.readline().strip()   
             if line:                 
                 #1.用户不存在情况
@@ -67,5 +67,5 @@ def monitorLog(logFile):
                         print('{} --- add ip:{} to hosts.deny for invalid password'.format(time_str, ip))
                     continue    
 if __name__ == '__main__':  #表示以下代码块只在直接运行脚本时执行
-    monitorLog(logFile)   #调用monitorLog方法，开始监控安全日志文件
+    monitorLog(logFile)   
 
