@@ -28,16 +28,12 @@ def getDenies():
 # 监控方法
 def monitorLog(logFile):   
     tempIp = {}        
-    deniedDict = getDenies()  
-    
+    deniedDict = getDenies()     
     with open(logFile) as file:
-        while True:   #无限循环，用于持续监控安全日志文件。
-            
+        while True:   #无限循环，用于持续监控安全日志文件。           
             line = file.readline().strip()   
-            if line:  
-                
+            if line:                 
                 #1.用户不存在情况
-                #re.search()函数，搜索第一个匹配某个正则表达式的子字符串。
                 group = re.search(r'Invalid user \w+ from (\d+\.\d+\.\d+\.\d+)', line)  
                 if group:
                     ip = group[1]  
@@ -70,6 +66,6 @@ def monitorLog(logFile):
                         time_str = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
                         print('{} --- add ip:{} to hosts.deny for invalid password'.format(time_str, ip))
                     continue    
-if __name__ == '__main__':  #表示以下代码块只在直接运行脚本时执行，而在作为模块被导入时不会执行
+if __name__ == '__main__':  #表示以下代码块只在直接运行脚本时执行
     monitorLog(logFile)   #调用monitorLog方法，开始监控安全日志文件
 
